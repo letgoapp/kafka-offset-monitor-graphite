@@ -1,0 +1,18 @@
+influxdb:
+  image: influxdb:latest
+  container_name: influxdb
+  ports:
+    - "9083:8083"
+    - "9086:8086"
+    - "9090:8090"
+  env_file:
+    - 'env.influxdb'
+
+
+grafana:
+  image: grafana/grafana:latest
+  container_name: grafana
+  ports:
+    - "9000:3000"
+  links:
+    - influxdb

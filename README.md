@@ -54,3 +54,61 @@ CREATE DATABASE kafka;
 CREATE USER kafka WITH PASSWORD 'kafka';
 GRANT ALL ON kafka TO kafka;
 ```
+
+### Use Docker with InfluxDB and Graphana
+
+
+```
+cd docker-influxdb-grafana
+```
+
+Get the stack (only once):
+
+```
+git clone https://github.com/nicolargo/docker-influxdb-grafana.git
+cd docker-influxdb-grafana
+docker pull grafana/grafana
+docker pull influxdb
+docker pull telegraf
+```
+
+Run your stack:
+
+```
+docker-compose up -d
+
+```
+
+Show me the logs:
+
+```
+docker-compose logs
+```
+
+Stop it:
+
+```
+docker-compose stop
+docker-compose rm
+```
+
+Update it:
+
+```
+git pull
+docker pull grafana/grafana
+docker pull influxdb
+```
+
+
+Docker InfluxDB is started in 9086 port. So for create the user and the database:
+```
+curl -POST http://localhost:9086/query --data-urlencode "q=CREATE DATABASE kafka"
+curl -POST http://localhost:9086/query --data-urlencode "q=CREATE USER kafka WITH PASSWORD 'kafka'"
+curl -POST http://localhost:9086/query --data-urlencode "q=GRANT ALL ON kafka TO kafka"
+```
+
+And Graphana is started on port 9000:
+
+
+http://localhost:9000

@@ -20,7 +20,9 @@ class OffsetInfluxDbReporter(pluginsArgs: String) extends com.quantifind.kafka.o
 
   val influxdbReporter = InfluxdbReporter.forRegistry(metrics)
     .protocol(protocol)
-    .convertRatesTo(TimeUnit.SECONDS).convertDurationsTo(TimeUnit.MILLISECONDS).filter(MetricFilter.ALL)
+    .convertRatesTo(TimeUnit.SECONDS)
+    .convertDurationsTo(TimeUnit.MILLISECONDS)
+    .filter(MetricFilter.ALL)
     .skipIdleMetrics(false)
     .transformer(MetricMeasurementTransformer.NOOP).build();
 
