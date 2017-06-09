@@ -1,4 +1,4 @@
-package pl.allegro.tech.kafka.offset.monitor.graphite
+package com.letgo.kafka.offset.monitor.influxdb
 
 class GaugesValues {
   var logSize: Long = 0L

@@ -1,4 +1,4 @@
-package pl.allegro.tech.kafka.offset.monitor.graphite
+package com.letgo.kafka.offset.monitor.influxdb
 
 import java.util.concurrent.TimeUnit
 
