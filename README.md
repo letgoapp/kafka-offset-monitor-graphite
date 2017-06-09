@@ -1,6 +1,6 @@
 kafka-offset-monitor-graphite
 ===========
-Plugin to [KafkaOffsetMonitor](https://github.com/quantifind/KafkaOffsetMonitor) tool reporting offset data to graphite via [dropwizard metrics](https://github.com/dropwizard/metrics).
+Plugin to [KafkaOffsetMonitor](https://github.com/quantifind/KafkaOffsetMonitor) tool reporting offset data to Influxdb via [dropwizard metrics](https://github.com/davidB/metrics-influxdb).
 
 
 Building It
@@ -24,21 +24,25 @@ Check how to run KafkaOffsetMonitor and modify the command by adding a plugin as
 See original KafkaOffsetMonitor example command modified with graphite reporter plugin usage:
 
 ```
-java -cp "KafkaOffsetMonitor-assembly-0.3.0-SNAPSHOT.jar:kafka-offset-monitor-graphite-assembly-0.1.0-SNAPSHOT.jar" \
-     com.quantifind.kafka.offsetapp.OffsetGetterWeb \
-     --zk zk-server1,zk-server2 \
-     --port 8080 \
-     --refresh 10.seconds \
-     --retain 2.days \
-     --pluginsArgs graphiteHost=graphite.host,graphitePort=2003,graphitePrefix=stats.kafka.offset_monitor
+java  -cp KafkaOffsetMonitor-assembly-0.4.1-SNAPSHOT.jar:kafka-offset-monitor-influxdb-assembly-1.0.jar com.quantifind.kafka.offsetapp.OffsetGetterWeb \
+	--offsetStorage kafka \
+	--kafkaBrokers localhost:9092 \
+	--zk localhost \
+	--port 8081 \
+	--refresh 10.seconds \
+	--retain 2.days \
+	--dbName offsetapp_kafka \
+	--pluginsArgs influxdbHost=localhost,influxdbPort=8086,influxdbUser=kafka,influxdbPassword=kafka,influxdbDatabase=kafka
 ```
 
 The pluginArgs used by kafka-offset-monitor-graphite are:
 
-- **graphiteHost** Graphite host (default localhost)
-- **graphitePort** Graphite reporting port (default 2003)
-- **graphitePrefix** Metrics prefix (default stats.kafka.offset.monitor)
-- **graphiteReportPeriod** Reporting period in seconds (default 30)
+- **influxdbHost** InfluxDB host (default localhost)
+- **influxdbPort** InfluxDB reporting port (default 8086)
+- **influxdbUser** InfluxDB user name.
+- **influxdbPassword** InfluxDB password.
+- **influxdbDatabase** InfluxDB metrics database.
+- **influxdbReportPeriod** Reporting period in seconds (default 30)
 - **metricsCacheExpireSeconds** Metrics cache TTL in mires (default 600). Offset metrics are stored in expiring cache and reported to Graphite periodically. If metrics are not updated they will be removed.
 
 
