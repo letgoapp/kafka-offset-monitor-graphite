@@ -40,3 +40,13 @@ The pluginArgs used by kafka-offset-monitor-graphite are:
 - **graphitePrefix** Metrics prefix (default stats.kafka.offset.monitor)
 - **graphiteReportPeriod** Reporting period in seconds (default 30)
 - **metricsCacheExpireSeconds** Metrics cache TTL in mires (default 600). Offset metrics are stored in expiring cache and reported to Graphite periodically. If metrics are not updated they will be removed.
+
+
+## InfluxDb
+### Create database and user
+
+```
+CREATE DATABASE kafka;
+CREATE USER kafka WITH PASSWORD 'kafka';
+GRANT ALL ON kafka TO kafka;
+```
