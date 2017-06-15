@@ -5,7 +5,7 @@ scalaVersion := "2.11.11"
 
 libraryDependencies ++= Seq(
   "com.google.guava" % "guava" % "18.0",
-  "com.quantifind" %% "kafkaoffsetmonitor" % "0.4.1-SNAPSHOT",
+  "com.quantifind" %% "kafkaoffsetmonitor" % "0.4.1-SNAPSHOT" % "provided",
   "com.github.davidb" % "metrics-influxdb" % "0.9.3",
   "io.dropwizard.metrics" % "metrics-core" % "3.2.2",
   "org.scalatest" %% "scalatest" % "2.2.4" % "test",
